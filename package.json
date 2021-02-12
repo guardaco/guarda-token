@@ -1,0 +1,26 @@
+{
+  "name": "guarda-wallet-token",
+  "version": "1.0.0",
+  "description": "",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@openzeppelin/contracts": "^3.4.0",
+    "@truffle/hdwallet-provider": "^1.2.1",
+    "dotenv": "^8.2.0",
+    "truffle": "^5.1.65",
+    "truffle-plugin-verify": "^0.5.4"
+  },
+  "scripts": {
+    "compile": "npx truffle compile",
+    "migrate:ropsten": "npx truffle migrate --network ropsten",
+    "migrate:mainnet": "npx truffle migrate --network mainnet",
+    "verify:ropsten": "truffle run verify GuardaToken --network ropsten --debug",
+    "verify:mainnet": "truffle run verify GuardaToken --network mainnet --debug"
+  },
+  "author": "",
+  "license": "ISC"
+}

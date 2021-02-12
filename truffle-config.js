@@ -23,6 +23,21 @@
 //
 // const fs = require('fs');
 // const mnemonic = fs.readFileSync(".secret").toString().trim();
+require('dotenv').config()
+const HDWalletProvider = require("@truffle/hdwallet-provider");
+
+
+const config = {
+  ropsten: {
+    privateKey: process.env.ROPSTEN_PRIVATE_KEY,
+    gasPrice: process.env.ROPSTEN_GAS_PRICE,
+  },
+  mainnet: {
+    privateKey: process.env.MAINNET_PRIVATE_KEY,
+    gasPrice: process.env.MAINNET_GAS
+  },
+  etherscanKey: process.env.ETHERSCAN_KEY
+}
 
 module.exports = {
   /**
@@ -36,6 +51,21 @@ module.exports = {
    */
 
   networks: {
+    ropsten: {
+      provider: () => new HDWalletProvider({ privateKeys : [config.ropsten.privateKey], providerOrUrl: `https://eth-ropsten.guarda.co`}),
+      network_id: 3,       // Ropsten's id
+      gasPrice: +config.ropsten.gasPrice,
+      timeoutBlocks: 200,  // # of blocks before a deployment times out  (minimum/default: 50)
+      skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
+    },
+    mainnet: {
+      provider: () => new HDWalletProvider({ privateKeys :[config.mainnet.privateKey], providerOrUrl: `https://eth.guarda.co`}),
+      network_id: 1,       // Ropsten's id
+      gasPrice: +config.mainnet.gasPrice,
+      timeoutBlocks: 50,  // # of blocks before a deployment times out  (minimum/default: 50)
+      skipDryRun: false,    // Skip dry run before migrations? (default: false for public nets )
+      production: true
+    },
     // Useful for testing. The `development` name is special - truffle uses it by default
     // if it's defined here and no other network is specified at the command line.
     // You should run a client (like ganache-cli, geth or parity) in a separate terminal
@@ -82,15 +112,20 @@ module.exports = {
   // Configure your compilers
   compilers: {
     solc: {
-      // version: "0.5.1",    // Fetch exact version from solc-bin (default: truffle's version)
-      // docker: true,        // Use "0.5.1" you've installed locally with docker (default: false)
-      // settings: {          // See the solidity docs for advice about optimization and evmVersion
-      //  optimizer: {
-      //    enabled: false,
-      //    runs: 200
-      //  },
-      //  evmVersion: "byzantium"
-      // }
+      version: "0.7.1",    // Fetch exact version from solc-bin (default: truffle's version)
+      settings: {          // See the solidity docs for advice about optimization and evmVersion
+       optimizer: {
+         enabled: true,
+         runs: 300
+       },
+       evmVersion: "petersburg"
+      }
     }
+  },
+  plugins: [
+    'truffle-plugin-verify'
+  ],
+  api_keys: {
+    etherscan: config.etherscanKey
   }
 };
