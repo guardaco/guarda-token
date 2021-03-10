@@ -19,9 +19,9 @@
   "scripts": {
     "compile": "npx truffle compile",
     "migrate:ropsten": "npx truffle migrate --reset --network ropsten",
-    "migrate:mainnet": "npx truffle migrate --network mainnet",
+    "migrate:mainnet": "npx truffle migrate --reset --network mainnet",
     "verify:ropsten": "truffle run verify GuardaToken --network ropsten",
-    "verify:mainnet": "truffle run verify GuardaToken --network mainnet --debug"
+    "verify:mainnet": "truffle run verify GuardaToken --network mainnet"
   },
   "author": "",
   "license": "ISC"
