@@ -55,12 +55,14 @@ module.exports = {
       provider: () => new HDWalletProvider({ privateKeys : [config.ropsten.privateKey], providerOrUrl: `https://eth-ropsten.guarda.co`}),
       network_id: 3,       // Ropsten's id
       gasPrice: +config.ropsten.gasPrice,
-      timeoutBlocks: 200,  // # of blocks before a deployment times out  (minimum/default: 50)
+      confirmations: 0,
+      timeoutBlocks: 50,  // # of blocks before a deployment times out  (minimum/default: 50)
       skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
     },
     mainnet: {
       provider: () => new HDWalletProvider({ privateKeys :[config.mainnet.privateKey], providerOrUrl: `https://eth.guarda.co`}),
       network_id: 1,       // Ropsten's id
+      confirmations: 0,
       gasPrice: +config.mainnet.gasPrice,
       timeoutBlocks: 50,  // # of blocks before a deployment times out  (minimum/default: 50)
       skipDryRun: false,    // Skip dry run before migrations? (default: false for public nets )

@@ -6,7 +6,9 @@
   "directories": {
     "test": "test"
   },
-  "dependencies": {},
+  "dependencies": {
+    "bignumber.js": "^9.0.1"
+  },
   "devDependencies": {
     "@openzeppelin/contracts": "^3.4.0",
     "@truffle/hdwallet-provider": "^1.2.1",
@@ -16,9 +18,9 @@
   },
   "scripts": {
     "compile": "npx truffle compile",
-    "migrate:ropsten": "npx truffle migrate --network ropsten",
+    "migrate:ropsten": "npx truffle migrate --reset --network ropsten",
     "migrate:mainnet": "npx truffle migrate --network mainnet",
-    "verify:ropsten": "truffle run verify GuardaToken --network ropsten --debug",
+    "verify:ropsten": "truffle run verify GuardaToken --network ropsten",
     "verify:mainnet": "truffle run verify GuardaToken --network mainnet --debug"
   },
   "author": "",
